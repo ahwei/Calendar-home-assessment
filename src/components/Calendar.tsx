@@ -73,11 +73,6 @@ const Calendar = ({
     }
   };
 
-  const handleToday = () => {
-    setCurrentDate(dayjs());
-    setZoomLevel(ZoomLevel.Day);
-  };
-
   const handleDayClick = (date: Dayjs) => {
     if (zoomLevel === ZoomLevel.Day) setSelectedDate?.(date);
   };
@@ -110,23 +105,13 @@ const Calendar = ({
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md">
-      {selectedDate?.toISOString()}
+    <div className="w-[300px] mx-auto p-2 bg-white rounded-lg shadow-sm">
       <CalendarHeader
         headerLabel={getHeaderLabel()}
         onPrev={handlePrev}
         onNext={handleNext}
         onHeaderClick={handleHeaderClick}
       />
-
-      <div className="flex justify-center items-center mb-6">
-        <button
-          className={`px-4 py-2 rounded-lg ${primaryColor} text-white shadow-sm hover:opacity-90 transition-colors duration-200 cursor-pointer`}
-          onClick={handleToday}
-        >
-          Today
-        </button>
-      </div>
 
       {zoomLevel === ZoomLevel.Day && (
         <CalendarViewButtons
