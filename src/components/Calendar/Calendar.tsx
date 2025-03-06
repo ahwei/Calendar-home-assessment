@@ -38,7 +38,6 @@ const Calendar = ({
   const handleHeaderClick = () => {
     if (zoomLevel === ZoomLevel.Day) setZoomLevel(ZoomLevel.Month);
     else if (zoomLevel === ZoomLevel.Month) setZoomLevel(ZoomLevel.Year);
-    else if (zoomLevel === ZoomLevel.Year) setZoomLevel(ZoomLevel.MultiYear);
     else setZoomLevel(ZoomLevel.Day);
   };
 
@@ -80,11 +79,6 @@ const Calendar = ({
     setZoomLevel(ZoomLevel.Month);
   };
 
-  const handleMultiYearSelect = (year: number) => {
-    setCurrentDate(currentDate.year(year));
-    setZoomLevel(ZoomLevel.Year);
-  };
-
   const getHeaderLabel = () => {
     if (zoomLevel === ZoomLevel.Day) return currentDate.format('YYYY-MM');
     if (zoomLevel === ZoomLevel.Month) return currentDate.format('YYYY');
@@ -119,7 +113,6 @@ const Calendar = ({
           onDayClick: handleDayClick,
           onMonthSelect: handleMonthSelect,
           onYearSelect: handleYearSelect,
-          onMultiYearSelect: handleMultiYearSelect,
         }}
       />
     </div>

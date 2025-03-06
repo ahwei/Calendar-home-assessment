@@ -14,7 +14,6 @@ interface CalendarGridActions {
   onDayClick: (date: Dayjs) => void;
   onMonthSelect: (month: number) => void;
   onYearSelect: (year: number) => void;
-  onMultiYearSelect: (year: number) => void;
 }
 
 interface CalendarGridProps {
@@ -31,8 +30,7 @@ const CalendarGrid = ({ state, actions }: CalendarGridProps) => {
     secondaryColor,
     displayDays,
   } = state;
-  const { onDayClick, onMonthSelect, onYearSelect, onMultiYearSelect } =
-    actions;
+  const { onDayClick, onMonthSelect, onYearSelect } = actions;
 
   if (zoomLevel === ZoomLevel.Day) {
     return (
@@ -114,27 +112,6 @@ const CalendarGrid = ({ state, actions }: CalendarGridProps) => {
             key={yr}
             onClick={() => onYearSelect(yr)}
             className={`py-2 text-center rounded-lg cursor-pointer transition-colors duration-200 ${
-              yr === currentDate.year()
-                ? `${primaryColor} text-white font-medium`
-                : 'hover:bg-gray-100'
-            }`}
-          >
-            {yr}
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (zoomLevel === ZoomLevel.MultiYear) {
-    const base = currentDate.year() - (currentDate.year() % 300);
-    return (
-      <div className="grid grid-cols-6 gap-2 max-h-[400px] overflow-auto">
-        {Array.from({ length: 300 }, (_, i) => base + i).map((yr) => (
-          <div
-            key={yr}
-            onClick={() => onMultiYearSelect(yr)}
-            className={`py-1 text-center rounded cursor-pointer transition-colors duration-200 ${
               yr === currentDate.year()
                 ? `${primaryColor} text-white font-medium`
                 : 'hover:bg-gray-100'
