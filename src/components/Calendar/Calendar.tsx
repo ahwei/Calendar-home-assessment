@@ -45,7 +45,6 @@ const Calendar = ({
     [ZoomLevel.Day]: { unit: 'month' as const, value: 1 },
     [ZoomLevel.Month]: { unit: 'year' as const, value: 1 },
     [ZoomLevel.Year]: { unit: 'year' as const, value: 10 },
-    [ZoomLevel.MultiYear]: { unit: 'year' as const, value: 300 },
   };
 
   const handlePrev = () => {
