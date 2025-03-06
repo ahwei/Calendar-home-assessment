@@ -1,4 +1,3 @@
-import { useCalender } from '@/CalenderConext';
 import { ZoomLevel } from '@/types/calendar';
 import dayjs, { Dayjs } from 'dayjs';
 import { useMemo, useState } from 'react';
@@ -8,13 +7,23 @@ import CalendarHeader from './CalendarHeader';
 interface CalendarProps {
   primaryColor?: string;
   secondaryColor?: string;
+  date?: Date | string;
+  onSelect?: (date: Dayjs) => void;
 }
+
+const zoomLevelConfigs = {
+  [ZoomLevel.Day]: { unit: 'month' as const, value: 1 },
+  [ZoomLevel.Month]: { unit: 'year' as const, value: 1 },
+  [ZoomLevel.Year]: { unit: 'year' as const, value: 10 },
+};
 
 const Calendar = ({
   primaryColor = 'bg-red-500',
   secondaryColor = 'bg-red-50',
+  date,
+  onSelect,
 }: CalendarProps) => {
-  const { selectedDate, setSelectedDate } = useCalender();
+  const selectedDate = date ? dayjs(date) : undefined;
 
   const [currentDate, setCurrentDate] = useState<Dayjs>(
     selectedDate || dayjs(),
@@ -41,12 +50,6 @@ const Calendar = ({
     else setZoomLevel(ZoomLevel.Day);
   };
 
-  const zoomLevelConfigs = {
-    [ZoomLevel.Day]: { unit: 'month' as const, value: 1 },
-    [ZoomLevel.Month]: { unit: 'year' as const, value: 1 },
-    [ZoomLevel.Year]: { unit: 'year' as const, value: 10 },
-  };
-
   const handlePrev = () => {
     const config = zoomLevelConfigs[zoomLevel];
     setCurrentDate((prev) => prev.subtract(config.value, config.unit));
@@ -58,7 +61,9 @@ const Calendar = ({
   };
 
   const handleDayClick = (date: Dayjs) => {
-    if (zoomLevel === ZoomLevel.Day) setSelectedDate?.(date);
+    if (zoomLevel === ZoomLevel.Day) {
+      onSelect?.(date);
+    }
   };
 
   const handleMonthSelect = (month: number) => {
