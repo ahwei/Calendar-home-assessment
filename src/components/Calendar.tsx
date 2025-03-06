@@ -1,10 +1,9 @@
 import { useCalender } from '@/CalenderConext';
 import dayjs, { Dayjs } from 'dayjs';
 import { useMemo, useState } from 'react';
-import { ViewMode, ZoomLevel } from '../types/calendar';
+import { ZoomLevel } from '../types/calendar';
 import CalendarGrid from './CalendarGrid';
 import CalendarHeader from './CalendarHeader';
-import CalendarViewButtons from './CalendarViewButtons';
 
 interface CalendarProps {
   primaryColor?: string;
@@ -17,7 +16,6 @@ const Calendar = ({
 }: CalendarProps) => {
   const { selectedDate, setSelectedDate } = useCalender();
 
-  const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Month);
   const [currentDate, setCurrentDate] = useState<Dayjs>(
     selectedDate || dayjs(),
   );
@@ -25,22 +23,17 @@ const Calendar = ({
 
   const displayDays = useMemo(() => {
     if (zoomLevel !== ZoomLevel.Day) return [];
+    const startOfMonth: Dayjs = currentDate.startOf('month').startOf('week');
+    const endOfMonth: Dayjs = currentDate.endOf('month').endOf('week');
 
-    if (viewMode === ViewMode.Month) {
-      const startOfMonth: Dayjs = currentDate.startOf('month').startOf('week');
-      const endOfMonth: Dayjs = currentDate.endOf('month').endOf('week');
-      const days: Dayjs[] = [];
-      let day = startOfMonth;
-      while (day.isBefore(endOfMonth) || day.isSame(endOfMonth, 'day')) {
-        days.push(day);
-        day = day.add(1, 'day');
-      }
-      return days;
-    } else {
-      const startOfWeek: Dayjs = currentDate.startOf('week');
-      return Array.from({ length: 7 }, (_, i) => startOfWeek.add(i, 'day'));
+    const days: Dayjs[] = [];
+    let day = startOfMonth;
+    while (day.isBefore(endOfMonth) || day.isSame(endOfMonth, 'day')) {
+      days.push(day);
+      day = day.add(1, 'day');
     }
-  }, [currentDate, viewMode, zoomLevel]);
+    return days;
+  }, [currentDate, zoomLevel]);
 
   const handleHeaderClick = () => {
     if (zoomLevel === ZoomLevel.Day) setZoomLevel(ZoomLevel.Month);
@@ -51,7 +44,7 @@ const Calendar = ({
 
   const handlePrev = () => {
     if (zoomLevel === ZoomLevel.Day) {
-      setCurrentDate((prev) => prev.subtract(1, viewMode));
+      setCurrentDate((prev) => prev.subtract(1, 'month'));
     } else if (zoomLevel === ZoomLevel.Month) {
       setCurrentDate((prev) => prev.subtract(1, 'year'));
     } else if (zoomLevel === ZoomLevel.Year) {
@@ -63,7 +56,7 @@ const Calendar = ({
 
   const handleNext = () => {
     if (zoomLevel === ZoomLevel.Day) {
-      setCurrentDate((prev) => prev.add(1, viewMode));
+      setCurrentDate((prev) => prev.add(1, 'month'));
     } else if (zoomLevel === ZoomLevel.Month) {
       setCurrentDate((prev) => prev.add(1, 'year'));
     } else if (zoomLevel === ZoomLevel.Year) {
@@ -113,18 +106,9 @@ const Calendar = ({
         onHeaderClick={handleHeaderClick}
       />
 
-      {zoomLevel === ZoomLevel.Day && (
-        <CalendarViewButtons
-          viewMode={viewMode}
-          onChange={setViewMode}
-          primaryColor={primaryColor}
-        />
-      )}
-
       <CalendarGrid
         state={{
           zoomLevel,
-          viewMode,
           currentDate,
           selectedDate,
           primaryColor,

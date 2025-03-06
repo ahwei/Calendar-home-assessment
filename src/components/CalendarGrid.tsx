@@ -3,7 +3,6 @@ import { ViewMode, ZoomLevel } from '../types/calendar';
 
 interface CalendarGridState {
   zoomLevel: ZoomLevel;
-  viewMode: ViewMode;
   currentDate: Dayjs;
   selectedDate?: Dayjs;
   primaryColor: string;
