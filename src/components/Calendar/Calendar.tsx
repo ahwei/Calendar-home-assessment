@@ -11,8 +11,8 @@ interface CalendarProps {
 }
 
 const Calendar = ({
-  primaryColor = 'bg-mint-500',
-  secondaryColor = 'bg-mint-50',
+  primaryColor = 'bg-red-500',
+  secondaryColor = 'bg-red-50',
 }: CalendarProps) => {
   const { selectedDate, setSelectedDate } = useCalender();
 

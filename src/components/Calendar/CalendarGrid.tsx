@@ -48,7 +48,7 @@ const CalendarGrid = ({ state, actions }: CalendarGridProps) => {
               key={day.format('YYYY-MM-DD')}
               onClick={() => onDayClick(day)}
               className={`
-                aspect-square p-2 flex items-center justify-center rounded-lg
+                aspect-square p-2 flex items-center justify-center rounded-full
                 transition-colors duration-200 cursor-pointer
                 ${
                   selectedDate?.isSame(day, 'day')
