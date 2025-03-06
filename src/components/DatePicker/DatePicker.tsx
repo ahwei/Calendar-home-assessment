@@ -19,6 +19,17 @@ const DatePicker = ({
   );
   const wrapperRef = useRef<HTMLDivElement>(null);
 
+  const handleDateSelect = (date: Dayjs) => {
+    const newDate = date.toDate();
+    setSelectedDate(newDate);
+    setIsOpen(false);
+    onChange?.(newDate);
+  };
+
+  const handleInputClick = () => {
+    setIsOpen(true);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -40,17 +51,6 @@ const DatePicker = ({
       setSelectedDate(new Date(value));
     }
   }, [value]);
-
-  const handleDateSelect = (date: Dayjs) => {
-    const newDate = date.toDate();
-    setSelectedDate(newDate);
-    setIsOpen(false);
-    onChange?.(newDate);
-  };
-
-  const handleInputClick = () => {
-    setIsOpen(true);
-  };
 
   return (
     <div className="relative" ref={wrapperRef}>
