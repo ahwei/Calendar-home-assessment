@@ -77,15 +77,11 @@ const Calendar = ({
   };
 
   const getHeaderLabel = () => {
-    if (zoomLevel === ZoomLevel.Day) return currentDate.format('YYYY-MM');
+    if (zoomLevel === ZoomLevel.Day) return currentDate.format('MMM YYYY');
     if (zoomLevel === ZoomLevel.Month) return currentDate.format('YYYY');
-    if (zoomLevel === ZoomLevel.Year) {
-      const startDecade = Math.floor(currentDate.year() / 10) * 10;
-      return `${startDecade}-${startDecade + 9}`;
-    }
 
-    const base = currentDate.year() - (currentDate.year() % 300);
-    return `${base}-${base + 299}`;
+    const startDecade = Math.floor(currentDate.year() / 10) * 10;
+    return `${startDecade}-${startDecade + 9}`;
   };
 
   return (
