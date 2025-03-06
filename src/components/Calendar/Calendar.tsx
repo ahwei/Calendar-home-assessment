@@ -41,28 +41,21 @@ const Calendar = ({
     else setZoomLevel(ZoomLevel.Day);
   };
 
+  const zoomLevelConfigs = {
+    [ZoomLevel.Day]: { unit: 'month' as const, value: 1 },
+    [ZoomLevel.Month]: { unit: 'year' as const, value: 1 },
+    [ZoomLevel.Year]: { unit: 'year' as const, value: 10 },
+    [ZoomLevel.MultiYear]: { unit: 'year' as const, value: 300 },
+  };
+
   const handlePrev = () => {
-    if (zoomLevel === ZoomLevel.Day) {
-      setCurrentDate((prev) => prev.subtract(1, 'month'));
-    } else if (zoomLevel === ZoomLevel.Month) {
-      setCurrentDate((prev) => prev.subtract(1, 'year'));
-    } else if (zoomLevel === ZoomLevel.Year) {
-      setCurrentDate((prev) => prev.subtract(10, 'year'));
-    } else if (zoomLevel === ZoomLevel.MultiYear) {
-      setCurrentDate((prev) => prev.subtract(300, 'year'));
-    }
+    const config = zoomLevelConfigs[zoomLevel];
+    setCurrentDate((prev) => prev.subtract(config.value, config.unit));
   };
 
   const handleNext = () => {
-    if (zoomLevel === ZoomLevel.Day) {
-      setCurrentDate((prev) => prev.add(1, 'month'));
-    } else if (zoomLevel === ZoomLevel.Month) {
-      setCurrentDate((prev) => prev.add(1, 'year'));
-    } else if (zoomLevel === ZoomLevel.Year) {
-      setCurrentDate((prev) => prev.add(10, 'year'));
-    } else if (zoomLevel === ZoomLevel.MultiYear) {
-      setCurrentDate((prev) => prev.add(300, 'year'));
-    }
+    const config = zoomLevelConfigs[zoomLevel];
+    setCurrentDate((prev) => prev.add(config.value, config.unit));
   };
 
   const handleDayClick = (date: Dayjs) => {
