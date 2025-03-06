@@ -22,14 +22,8 @@ interface CalendarGridProps {
 }
 
 const CalendarGrid = ({ state, actions }: CalendarGridProps) => {
-  const {
-    zoomLevel,
-    currentDate,
-    selectedDate,
-    primaryColor,
-    secondaryColor,
-    displayDays,
-  } = state;
+  const { zoomLevel, currentDate, selectedDate, primaryColor, displayDays } =
+    state;
   const { onDayClick, onMonthSelect, onYearSelect } = actions;
 
   if (zoomLevel === ZoomLevel.Day) {
@@ -85,7 +79,7 @@ const CalendarGrid = ({ state, actions }: CalendarGridProps) => {
       'December',
     ];
     return (
-      <div className="grid grid-cols-4 gap-4 text-sm">
+      <div className="grid grid-cols-4 gap-4 text-xs">
         {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
           <div
             key={m}
