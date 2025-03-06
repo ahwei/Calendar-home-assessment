@@ -1,5 +1,3 @@
-
-
 # Calendar-home-assessment
 
 > This project is a modified and optimized version of my own open-source project [Calendar-example](https://github.com/ahwei/Calendar-example), submitted as an interview assignment.
@@ -22,25 +20,45 @@ This calendar application interview assignment utilizes several packages and bes
    ```
    npm install
    ```
+   or with pnpm:
+   ```
+   pnpm install
+   ```
 
 2. Start development server:
    ```
    npm run dev
+   ```
+   or with pnpm:
+   ```
+   pnpm dev
    ```
 
 3. Build the project:
    ```
    npm run build
    ```
+   or with pnpm:
+   ```
+   pnpm build
+   ```
 
 4. Preview production build:
    ```
    npm run preview
    ```
+   or with pnpm:
+   ```
+   pnpm preview
+   ```
 
 5. Run tests:
    ```
    npm run test
+   ```
+   or with pnpm:
+   ```
+   pnpm test
    ```
 
 ## Git Commit Guidelines
