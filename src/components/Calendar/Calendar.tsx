@@ -1,7 +1,7 @@
 import { useCalender } from '@/CalenderConext';
+import { ZoomLevel } from '@/types/calendar';
 import dayjs, { Dayjs } from 'dayjs';
 import { useMemo, useState } from 'react';
-import { ZoomLevel } from '../types/calendar';
 import CalendarGrid from './CalendarGrid';
 import CalendarHeader from './CalendarHeader';
 

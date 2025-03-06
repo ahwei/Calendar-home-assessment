@@ -1,5 +1,5 @@
+import { ZoomLevel } from '@/types/calendar';
 import { Dayjs } from 'dayjs';
-import { ViewMode, ZoomLevel } from '../types/calendar';
 
 interface CalendarGridState {
   zoomLevel: ZoomLevel;
