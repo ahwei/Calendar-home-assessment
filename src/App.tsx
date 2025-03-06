@@ -4,15 +4,14 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 
 const App = () => {
-  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | undefined>();
-  const [pickerDate, setPickerDate] = useState<Date | undefined>();
+  const [date, setDate] = useState<Date | undefined>(undefined);
 
-  const handleCalendarSelect = (date: dayjs.Dayjs) => {
-    setSelectedDate(date);
+  const handleCalendarSelect = (selectedDate: dayjs.Dayjs) => {
+    setDate(selectedDate.toDate());
   };
 
-  const handlePickerChange = (date: Date) => {
-    setPickerDate(date);
+  const handlePickerChange = (selectedDate: Date) => {
+    setDate(selectedDate);
   };
 
   return (
@@ -24,13 +23,10 @@ const App = () => {
               Calendar Component
             </h2>
             <div className="flex flex-col items-center">
-              <Calendar
-                date={selectedDate?.toDate()}
-                onSelect={handleCalendarSelect}
-              />
-              {selectedDate && (
+              <Calendar date={date} onSelect={handleCalendarSelect} />
+              {date && (
                 <div className="mt-4 text-center text-gray-700">
-                  Selected Date: {selectedDate.format('YYYY-MM-DD')}
+                  Selected Date: {dayjs(date).format('YYYY-MM-DD')}
                 </div>
               )}
             </div>
@@ -43,18 +39,13 @@ const App = () => {
             <div className="flex flex-col items-center">
               <div className="w-full max-w-xs">
                 <DatePicker
-                  value={pickerDate}
+                  value={date}
                   onChange={handlePickerChange}
                   primaryColor="bg-blue-500"
                   secondaryColor="bg-blue-50"
                   placeholder="Select a date..."
                 />
               </div>
-              {pickerDate && (
-                <div className="mt-4 text-center text-gray-700">
-                  Selected Date: {dayjs(pickerDate).format('YYYY-MM-DD')}
-                </div>
-              )}
             </div>
           </div>
         </div>
