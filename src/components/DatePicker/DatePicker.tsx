@@ -3,16 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import Calendar from '../Calendar/Calendar';
 
 interface DatePickerProps {
-  primaryColor?: string;
-  secondaryColor?: string;
   value?: Date | string;
   onChange?: (date: Date) => void;
   placeholder?: string;
 }
 
 const DatePicker = ({
-  primaryColor,
-  secondaryColor,
   value,
   onChange,
   placeholder = 'Select a date',
@@ -69,12 +65,7 @@ const DatePicker = ({
 
       {isOpen && (
         <div className="absolute z-10 mt-1">
-          <Calendar
-            primaryColor={primaryColor}
-            secondaryColor={secondaryColor}
-            date={selectedDate}
-            onSelect={handleDateSelect}
-          />
+          <Calendar date={selectedDate} onSelect={handleDateSelect} />
         </div>
       )}
     </div>
