@@ -48,13 +48,13 @@ const CalendarGrid = ({ state, actions }: CalendarGridProps) => {
               key={day.format('YYYY-MM-DD')}
               onClick={() => onDayClick(day)}
               className={`
-                aspect-square p-2 flex items-center justify-center rounded-full
+                aspect-square flex items-center justify-center rounded-full
                 transition-colors duration-200 cursor-pointer
                 ${
                   selectedDate?.isSame(day, 'day')
                     ? `${primaryColor} text-white font-medium`
                     : day.isSame(dayjs(), 'day')
-                    ? `${secondaryColor} font-medium`
+                    ? `text-red-500 font-medium`
                     : day.isSame(currentDate, 'month')
                     ? 'hover:bg-gray-100'
                     : 'text-gray-400 hover:bg-gray-50'
