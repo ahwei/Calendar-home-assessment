@@ -1,8 +1,12 @@
+
+
 # Calendar-home-assessment
 
 > This project is a modified and optimized version of my own open-source project [Calendar-example](https://github.com/ahwei/Calendar-example), submitted as an interview assignment.
 
 ## Project Description
+
+![Calendar Application Preview](public/view.png)
 
 This calendar application interview assignment utilizes several packages and best practices I've recently developed and worked with:
 
