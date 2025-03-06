@@ -1,5 +1,5 @@
 import { ZoomLevel } from '@/types/calendar';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface CalendarGridState {
   zoomLevel: ZoomLevel;
@@ -85,7 +85,7 @@ const CalendarGrid = ({ state, actions }: CalendarGridProps) => {
       'December',
     ];
     return (
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-4 text-sm">
         {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
           <div
             key={m}
@@ -128,6 +128,3 @@ const CalendarGrid = ({ state, actions }: CalendarGridProps) => {
 };
 
 export default CalendarGrid;
-
-// 注意：需在此檔案中引入 dayjs 以供 isSame 等比較使用
-import dayjs from 'dayjs';
